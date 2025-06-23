@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: satellite-tracker
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema.registry.url: http://localhost:8081
+        auto.register.schemas: true
+satellite:
+  polling:
+    celestrak:
+      interval: 1800
+      enabled: true
+    n2yo:
+      interval: 300
+      enabled: true
+      api-key: ${N2YO_API_KEY:79WYXN-DUBPAV-SGRHHV-5ID7}
+    spacetrack:
+      interval: 3600
+      enabled: true
+      username: ${SPACETRACK_USERNAME:k.burney323@gmail.com}
+      password: ${SPACETRACK_PASSWORD:lkdmflksdMSDFLKMSDlkmdflksdMSLDK}
+  tracked-satellites:
+    - id: "25544"
+      name: "ISS"
+  observer-locations:
+    - name: "New York"
+      latitude: 40.7128
+      longitude: -74.0060
+kafka:
+  topics:
+    satellite-position: satellite-position-events
+    satellite-pass: satellite-pass-events
+    satellite-tle: satellite-tle-updates
