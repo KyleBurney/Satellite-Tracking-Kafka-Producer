@@ -86,6 +86,26 @@ Or run as a JAR:
 java -jar target/satellite-tracker-1.0.0.jar
 ```
 
+## Testing
+
+Run the unit tests:
+
+```bash
+mvn test
+```
+
+Run tests with detailed output:
+
+```bash
+mvn test -Dtest.verbose=true
+```
+
+Run a specific test class:
+
+```bash
+mvn test -Dtest=CelestrakClientTest
+```
+
 ## Configuration
 
 ### Tracked Satellites
