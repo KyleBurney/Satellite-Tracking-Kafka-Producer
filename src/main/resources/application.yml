@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: satellite-tracker
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      properties:
+        schema.registry.url: http://localhost:8081
+        auto.register.schemas: true
+satellite:
+  polling:
+    celestrak:
+      interval: 1800
+      enabled: true
+    n2yo:
+      interval: 300
+      enabled: true
+      api-key: ${N2YO_API_KEY}
+    spacetrack:
+      interval: 3600
+      enabled: true
+      username: ${SPACETRACK_USERNAME}
+      password: ${SPACETRACK_PASSWORD}
+  tracked-satellites:
+    - id: "25544"
+      name: "ISS"
+    - id: "20580"
+      name: "HUBBLE"
+    - id: "27424"
+      name: "ENVISAT"
+    - id: "37849"
+      name: "SPOT-7"
+    - id: "43013"
+      name: "NOAA-20"
+    - id: "25338"
+      name: "NOAA-15"
+  observer-locations:
+    - name: "New York"
+      latitude: 40.7128
+      longitude: -74.0060
+kafka:
+  topics:
+    satellite-position: satellite-position-events
+    satellite-pass: satellite-pass-events
+    satellite-tle: satellite-tle-updates
